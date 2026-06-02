@@ -24,10 +24,10 @@ public interface ConsignRepository extends CrudRepository<ConsignRecord, String>
     /**
      * find by order id
      *
-     * @param accountId account id
-     * @return ConsignRecord
+     * @param orderId order id
+     * @return ArrayList<ConsignRecord>
      */
-    ConsignRecord findByOrderId(String accountId);
+    ArrayList<ConsignRecord> findByOrderId(String orderId);
 
     /**
      * find by consignee

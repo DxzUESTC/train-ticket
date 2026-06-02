@@ -25,6 +25,10 @@ public class ConsignPriceServiceImpl implements ConsignPriceService {
     @Override
     public Response getPriceByWeightAndRegion(double weight, boolean isWithinRegion, HttpHeaders headers) {
         ConsignPrice priceConfig = repository.findByIndex(0);
+        if (priceConfig == null) {
+            LOGGER.error("[getPriceByWeightAndRegion][Price config not found in database]");
+            return new Response<>(0, "Price config not found", 0.0);
+        }
         double price = 0;
         double initialPrice = priceConfig.getInitialPrice();
         if (weight <= priceConfig.getInitialWeight()) {

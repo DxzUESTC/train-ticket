@@ -9,7 +9,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>ts-consign-price-service</name>
+    <name>ts-consign-service</name>
 
     <parent>
         <artifactId>ts-service</artifactId>

@@ -109,7 +109,8 @@ public class ConsignServiceImplTest {
     @Test
     public void testQueryByOrderId1() {
         UUID orderId = UUID.randomUUID();
-        ConsignRecord consignRecords = new ConsignRecord();
+        ArrayList<ConsignRecord> consignRecords = new ArrayList<>();
+        consignRecords.add(new ConsignRecord());
         Mockito.when(repository.findByOrderId(Mockito.anyString())).thenReturn(consignRecords);
         Response result = consignServiceImpl.queryByOrderId(orderId, headers);
         Assert.assertEquals(new Response<>(1, "Find consign by order id success", consignRecords), result);
@@ -119,6 +120,15 @@ public class ConsignServiceImplTest {
     public void testQueryByOrderId2() {
         UUID orderId = UUID.randomUUID();
         Mockito.when(repository.findByOrderId(Mockito.anyString())).thenReturn(null);
+        Response result = consignServiceImpl.queryByOrderId(orderId, headers);
+        Assert.assertEquals(new Response<>(0, "No Content according to order id", null), result);
+    }
+
+    @Test
+    public void testQueryByOrderId3() {
+        UUID orderId = UUID.randomUUID();
+        ArrayList<ConsignRecord> consignRecords = new ArrayList<>();
+        Mockito.when(repository.findByOrderId(Mockito.anyString())).thenReturn(consignRecords);
         Response result = consignServiceImpl.queryByOrderId(orderId, headers);
         Assert.assertEquals(new Response<>(0, "No Content according to order id", null), result);
     }
